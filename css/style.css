@@ -1,0 +1,655 @@
+/* =====================
+   全体レイアウト
+   ===================== */
+html,
+body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  /* ★ 全体はスクロールさせない */
+  overflow: hidden;
+}
+
+body {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  font-family: Arial, sans-serif;
+
+  background-image: url('../images/background.png');
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center center;
+  background-attachment: fixed;
+
+  /* ★ フッターの高さぶん余白を確保（高さは好みで調整） */
+  /*padding-bottom: 60px;*/
+}
+
+/* =====================
+   ヘッダー
+   ===================== */
+.page-header {
+  width: 100%;
+  background: rgba(255, 255, 255, 0.9);
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+  padding: 8px 0;
+}
+
+.page-header h1 {
+  margin: 0;
+  font-size: 1.4rem;
+}
+/* =====================
+   main-wrap（中央の見出し＋スクロールビュー）
+   ===================== */
+.main-wrap {
+  width: 100%;
+  /* サイドバー用の余白は後でメディアクエリ内で付ける */
+  /* ★ 余った縦スペースを埋める＋自前スクロール領域だけにする */
+  flex: 1;
+  overflow: hidden;
+}
+
+/* =====================
+   スクロールビュー（ここだけスクロール）
+   ===================== */
+.table-container {
+  margin: 0px auto;
+  width: 90%;
+  max-width: 600px;
+
+  background-color: rgba(255, 255, 255, 0.9);
+  border-radius: 0px;
+  padding: 10px;
+  box-shadow: 0 0 8px rgba(0, 0, 0, 0.2);
+
+  /* ★ 真ん中の白い部分だけスクロール */
+  overflow-y: auto;
+  /* ★ フッター分の余白（60px など。好みで調整） */
+  /*padding-bottom: 80px;*/
+}
+
+/* =====================
+   見出し
+   ===================== */
+h1 {
+  margin: 16px 0 0;
+}
+
+/* =====================
+   フッター（常に下）
+   ===================== */
+.footer-links {
+  /* ここを差し替え */
+  /* margin-top: auto;  ←不要 */
+  background: rgba(255, 255, 255, 0.9);
+  text-align: center;
+  padding: 12px 0;
+  font-size: 1rem;
+  box-shadow: 0 -2px 6px rgba(0, 0, 0, 0.1);
+
+  /* ★ 画面下部に固定する */
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 10;
+}
+
+.footer-links a {
+  display: inline-block;
+  margin: 0 10px;
+  color: blue;
+  text-decoration: underline;
+}
+
+/* =====================
+   テーブル本体
+   ===================== */
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+th,
+td {
+  border: 1px solid #000;
+  padding: 8px 12px;
+  text-align: left;
+  font-size: 1rem;
+}
+
+th {
+  background-color: #eee;
+}
+
+/* =====================
+   リンク
+   ===================== */
+.search-link {
+  color: blue;
+  text-decoration: underline;
+}
+
+.search-link:hover {
+  color: darkblue;
+}
+
+/* =====================
+   スマホ対応
+   ===================== */
+@media screen and (max-width: 600px) {
+  .table-container {
+    width: 95%;
+  }
+
+  th,
+  td {
+    font-size: 0.9rem;
+    padding: 6px 8px;
+  }
+}
+
+/* =====================
+   データ置き場は隠す
+   ===================== */
+#item-source {
+  display: none;
+}
+
+/* =====================
+   一覧行の見た目
+   ===================== */
+.table-container table td,
+.table-container table th {
+  font-size: 0.85rem;
+  padding: 4px 6px;
+  line-height: 1.2;
+}
+
+/* PC の幅を少し広げる */
+@media (min-width: 800px) {
+  .table-container {
+    max-width: 720px;
+  }
+}
+
+/* =====================
+   サイドバー
+   ===================== */
+.series-index {
+  display: none;
+}
+
+/* =====================
+   サイドバー ＋ PC レイアウト
+   ===================== */
+@media (min-width: 600px) {
+
+  /* サイドバーの幅＋余白 */
+  :root {
+    --sidebar-width: 220px;
+    --sidebar-gap: 16px; /* ← 余白（調整可） */
+  }
+
+  /* 全体ラップ */
+  .main-wrap {
+    width: 100%;
+    box-sizing: border-box;
+    /* 左右のサイドバー分のスペースを空ける */
+    padding-right: calc(var(--sidebar-width) + var(--sidebar-gap));
+    padding-left: calc(var(--sidebar-width) + var(--sidebar-gap));
+  }
+
+  /* 中央リストの幅を左右サイドバーぶん狭める */
+  .table-container {
+    max-width: 720px;
+    width: calc(100% - (var(--sidebar-width) * 2) - (var(--sidebar-gap) * 2));
+    margin-left: var(--sidebar-gap);
+    margin-right: var(--sidebar-gap);
+    margin-top: 0;
+    margin-bottom: 0;
+  }
+
+  /* 右サイドバー */
+  .series-index {
+    display: block;
+    position: fixed;
+    right: 0;
+    width: var(--sidebar-width);
+    background: rgba(255, 255, 255, 0.95);
+    border-radius: 0;
+    box-shadow: 0 0 6px rgba(0, 0, 0, 0.2);
+    padding: 8px 10px;
+    font-size: 0.8rem;
+    text-align: left;
+    z-index: 5;
+    overflow-y: auto;
+    /* ★ 下に余白をつけてフッターと重ならないようにする */
+    padding-bottom: 80px;
+  }
+}
+
+.series-index-title {
+  font-weight: bold;
+  margin-bottom: 4px;
+  font-size: 0.85rem;
+}
+
+.series-index ul {
+  list-style: none;
+  padding-left: 0;
+  margin: 0;
+}
+
+.series-index li {
+  margin: 2px 0;
+}
+
+.series-index button {
+  width: 100%;
+  text-align: left;
+  border: none;
+  background: none;
+  padding: 2px 4px;
+  font-size: 0.8rem;
+  cursor: pointer;
+}
+
+.series-index button:hover {
+  background: #eee;
+}
+/* =====================
+   シリーズ見出し（折りたたみ）
+   ===================== */
+
+/* 見出し行の見た目 */
+.series-header td {
+  font-weight: bold;
+  background-color: #ddd;
+  border-top: 2px solid #000;
+  cursor: pointer;
+  padding-left: 4px;
+}
+
+/* ▼ 閉じているとき（折りたたみ） */
+.series-header.collapsed td::before {
+  content: "▶ ";
+}
+
+/* ▼ 開いているとき（展開） */
+.series-header.expanded td::before {
+  content: "▼ ";
+}
+
+/* ============================
+   スクロールビューの位置調整（ベース）
+   ============================ */
+
+/* 標準（スマホ～小さいPC）：中央寄せ */
+.table-container {
+  margin: 0px auto;
+  width: 90%;
+  max-width: 720px;
+}
+/* スクロールする2つのボックスは border-box にする */
+.table-container,
+.series-index {
+  box-sizing: border-box;
+}
+
+/* 検索ボックスのスタイル */
+.search-box {
+  width: 300px;
+  /* ← 固定幅（好きな幅に） */
+  margin: 0 auto 12px;
+  text-align: center;
+}
+
+#item-search {
+  width: 80%;
+  /* ← 親（600px）の 80% に固定 */
+  padding: 6px 10px;
+  font-size: 1rem;
+  box-sizing: border-box;
+}
+.menu-buttons {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+  /* ボタン同士の間隔 */
+  margin-top: 40px;
+}
+
+.menu-button {
+  display: inline-block;
+  padding: 16px 40px;
+  font-size: 1.4rem;
+  font-weight: bold;
+  color: #ffffff;
+  background: rgba(0, 0, 0, 0.65);
+  border-radius: 12px;
+  text-decoration: none;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+  transition: transform 0.15s ease, background 0.15s ease;
+}
+
+.menu-button:hover {
+  background: rgba(0, 0, 0, 0.85);
+  transform: translateY(-4px);
+}
+
+.menu-button:active {
+  transform: translateY(-1px);
+}
+/* ============================
+   トップページ専用レイアウト
+   ============================ */
+
+body.index-page {
+  overflow: hidden;
+  /* 背景固定のまま中央だけ見せたい場合 */
+}
+
+/* main-wrap をサイドバー用からトップページ用に上書き */
+body.index-page .main-wrap {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  /* 上寄せ */
+  align-items: center;
+
+  min-height: calc(100vh - 140px);
+
+  padding-top: 80px;
+  padding-bottom: 20px;
+  padding-right: 0;
+  /* ★サイドバー用の余白をなくす！ */
+
+  text-align: center;
+}
+
+/* ボタンを大きく中央に */
+.menu-buttons {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 24px;
+}
+
+.menu-button {
+  display: inline-block;
+
+  padding: 20px 60px;
+  font-size: 1.6rem;
+  font-weight: bold;
+
+  color: white;
+  text-decoration: none;
+
+  background: rgba(0, 0, 0, 0.7);
+  border-radius: 14px;
+
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+  transition: transform 0.15s ease, background 0.2s ease;
+}
+
+/* ホバー演出 */
+.menu-button:hover {
+  background: rgba(0, 0, 0, 0.85);
+  transform: translateY(-4px);
+}
+
+.menu-button:active {
+  transform: translateY(-1px);
+}
+/* ============================
+   トップページ：ボタン横並び
+   ============================ */
+
+body.index-page .menu-buttons {
+  flex-direction: row;
+  /* ← 横並び */
+  justify-content: center;
+  /* ← 水平方向の中央揃え */
+  gap: 40px;
+  /* ← ボタン間の距離 */
+  margin-top: 40px;
+}
+
+body.index-page .menu-button {
+  min-width: 180px;
+  /* ← 好きな横幅に調整可能 */
+  text-align: center;
+}
+/* ============================
+   インデックスページ：ボタン正方形
+   ============================ */
+
+body.index-page .menu-button {
+  width: 140px;
+  /* 好きなサイズに変更OK */
+  height: 140px;
+  /* 正方形にする */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  padding: 0;
+  /* 正方形を崩す padding は消す */
+  font-size: 1.4rem;
+  font-weight: bold;
+  text-align: center;
+
+  background: rgba(0, 0, 0, 0.65);
+  border-radius: 16px;
+  /* 正方形＋角丸 */
+}
+/* ============================
+   メーカー一覧ページ専用レイアウト
+   ============================ */
+
+body.maker-page .main-wrap {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  flex-direction: column;
+
+  min-height: calc(100vh - 140px);
+  padding-top: 80px;
+  padding-bottom: 20px;
+  padding-right: 0;
+}
+
+body.maker-page .maker-buttons {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  gap: 40px;
+}
+
+body.maker-page .maker-button {
+  width: 140px;
+  /* 正方形ボタン */
+  height: 140px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  padding: 0;
+  font-size: 1.2rem;
+  font-weight: bold;
+
+  color: white;
+  text-decoration: none;
+
+  background: rgba(0, 0, 0, 0.65);
+  border-radius: 16px;
+
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+  transition: transform 0.15s ease, background 0.2s ease;
+}
+
+body.maker-page .maker-button:hover {
+  background: rgba(0, 0, 0, 0.85);
+  transform: translateY(-4px);
+}
+
+/* リールカテゴリ一覧 専用デザイン */
+
+/* ボタンを横並びにするコンテナ */
+.reel-category-buttons {
+  display: flex;
+  flex-direction: row;
+  /* 横並び */
+  justify-content: center;
+  align-items: center;
+  gap: 40px;
+  /* ボタン間の距離 */
+  margin-top: 40px;
+  flex-wrap: wrap;
+  /* 狭い画面では折り返し（お好みで） */
+}
+
+/* 各ボタンの見た目 */
+.reel-category-buttons .reel-category-button,
+.reel-category-buttons .rod-category-button {
+  width: 200px;
+  height: 140px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  padding: 0;
+  font-size: 1.2rem;
+  font-weight: bold;
+
+  color: white;
+  text-decoration: none;
+
+  background: rgba(0, 0, 0, 0.65);
+  border-radius: 16px;
+
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+  transition: transform 0.15s ease, background 0.2s ease;
+}
+
+/* ホバー時（トップページのボタンと同じ雰囲気に） */
+.reel-category-buttons .reel-category-button:hover,
+.reel-category-buttons .rod-category-button:hover {
+  background: rgba(0, 0, 0, 0.85);
+  transform: translateY(-4px);
+}
+/* =====================
+   左サイドバー（サイト全体ナビ）
+   ===================== */
+
+.site-nav {
+  display: none;
+  /* 初期は消しておいて、PC幅で表示（JSで位置調整） */
+}
+
+.site-nav-title {
+  font-weight: bold;
+  margin-bottom: 4px;
+  font-size: 0.85rem;
+}
+
+/* PC幅で表示＆右サイドバーと同じ雰囲気に */
+@media (min-width: 600px) {
+  .site-nav {
+    display: block;
+    position: fixed;
+    left: 0;
+    width: var(--sidebar-width);
+    background: rgba(255, 255, 255, 0.95);
+    border-radius: 0;
+    box-shadow: 0 0 6px rgba(0, 0, 0, 0.2);
+    padding: 8px 10px;
+    font-size: 0.8rem;
+    text-align: left;
+    z-index: 5;
+    overflow-y: auto;
+    padding-bottom: 80px;
+    /* フッターと重ならないように */
+  }
+}
+
+.site-nav ul {
+  list-style: none;
+  padding-left: 0;
+  margin: 0;
+}
+
+.site-nav li {
+  margin: 2px 0;
+}
+
+.site-nav a {
+  display: block;
+  text-align: left;
+  text-decoration: none;
+  color: #333;
+  font-size: 0.8rem;
+  padding: 2px 4px;
+  cursor: pointer;
+}
+
+.site-nav a:hover {
+  background: #eee;
+}
+/* ============================
+   サイト全体ナビ：階層インデント＆矢印
+   ============================ */
+
+/* 親見出し（ロッド / リール など） */
+.site-nav li.nav-section {
+  font-weight: bold;
+  margin-top: 8px;
+  padding-top: 4px;
+  border-top: 1px solid #ddd;
+  padding-left: 0;
+  /* 親はインデントなし */
+}
+
+/* すべての li の基本 */
+.site-nav li {
+  margin: 2px 0;
+  padding-left: 0;
+  /* ここを 0 にしておくのがポイント */
+}
+
+/* level ごとのインデント */
+.site-nav li[data-level="1"] {
+  padding-left: 12px;
+  /* 1階層目（カテゴリ一覧） */
+}
+
+.site-nav li[data-level="2"] {
+  padding-left: 24px;
+  /* 2階層目（メーカー一覧） */
+}
+
+/* 子階層の前に矢印マーカーを表示 */
+.site-nav li[data-level="1"]>a::before,
+.site-nav li[data-level="2"]>a::before {
+  content: "▶︎ ";
+  font-size: 0.8rem;
+  margin-right: 2px;
+}
+
+.site-nav-copyright {
+  margin-top: 12px;
+  padding-top: 8px;
+  border-top: 1px solid #ddd;
+
+  font-size: 0.7rem;
+  color: #666;
+  text-align: left;
+  opacity: 0.8;
+
+  /* サイドバー内で少し余裕を持たせる */
+}

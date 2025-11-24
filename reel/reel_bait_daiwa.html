@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>リール - DAIWA</title>
+  <link rel="stylesheet" href="../css/style.css" />
+</head>
+
+<body>
+    <header class="page-header">
+      <h1>TackleIndex〜釣具モデル検索〜</h1>
+    </header>
+
+  <div class="main-wrap">
+    <h1 class="page-title">DAIWA<br>ベイトリール</h1>
+  <!-- ★ ユーザーが見るのはこのスクロールビューだけ -->
+  <div class="table-container">
+    <table id="item-table">
+      <thead>
+        <tr>
+          <th>アイテム</th>
+        </tr>
+      </thead>
+      <tbody>
+        <!-- JSが自動生成するので空でOK -->
+      </tbody>
+    </table>
+  </div>
+  <!-- ★ データ置き場（画面には出さない）。ここだけコピペ更新 -->
+  <pre id="item-source">
+11 バイキング 筏 44　VIKING 筏 44
+12 シーライン イシダイ　40H
+12 シーライン イシダイ　40H遠投
+12 シーライン イシダイ　50
+13 BJ　75D
+14 タナセンサー　250早技
+14 タナセンサー　300
+14 タナセンサー　400
+14 タナセンサー　500
+14 ミリオネア カゴ　300
+15 シーライン LD　60ⅡSP
+15 リョウガ シュラプネル　C3000H
+15 リョウガ シュラプネル　C3000HL
+16 ヴァデル BJ　100SH
+16 ヴァデル BJ　100SHL
+16 キャタリナ BJ　100H
+16 キャタリナ BJ　100HL
+16 キャタリナ BJ　100SH
+16 キャタリナ BJ　100SHL
+16 キャタリナ BJ　200SH
+16 キャタリナ BJ　200SHL
+16 スティーズ SV TW　1016SV-H
+16 スティーズ SV TW　1016SV-HL
+16 スティーズ SV TW　1016SV-SH
+16 スティーズ SV TW　1016SV-SHL
+16 プリード　150H
+16 プリード　150SH-DH
+16 プリード　150SH-DH-L
+17 Z ブラック リミテッド　2020SH
+17 Z ブラック リミテッド　2020SHL
+17 キャタリナ BJ　100PL-RM
+17 キャタリナ BJ　100P-RM
+17 スティーズ A TW　1016H
+17 スティーズ A TW　1016HL
+17 スティーズ A TW　1016SH
+17 スティーズ A TW　1016SHL
+17 スティーズ SV TW　1012SV-XH
+17 スティーズ SV TW　1012SV-XHL
+17 ソルティガ BJ　100PL-RM
+17 ソルティガ BJ　100P-RM
+17 ソルティガ BJ　100SH
+17 ソルティガ BJ　100SHL
+17 ソルティガ BJ　200H
+17 ソルティガ BJ　200HL
+17 ソルティガ BJ　200SH
+17 ソルティガ BJ　200SHL
+17 ダイナスター　150
+17 ダイナスター　150L
+17 ダイナスター　250
+17 ダイナスター　300
+17 タナセンサー　150DH
+17 タナセンサー　150DH-L
+17 タナセンサー　150H
+17 タナセンサー　150H-DH
+17 タナセンサー　150H-DH-L
+17 タナセンサー　150HL
+17 鏡牙　100SH
+17 鏡牙　100SHL
+17 幻覇王 石鯛　30
+17 幻覇王 石鯛　40
+17 幻覇王 石鯛　50
+18 BJ　イカダ 70
+18 BJ　イカダ 70L
+18 DR-Z　2020XH
+18 DR-Z　2020XHL
+18 HRF　ソニックスピード 9.1L-TW
+18 HRF　ソニックスピード 9.1R-TW
+18 SV ライト リミテッド　6.3L-TN
+18 SV ライト リミテッド　6.3R-TN
+18 SV ライト リミテッド　8.1L-TN
+18 SV ライト リミテッド　8.1R-TN
+18 シーホーク　300遠投
+18 スティーズ A TW　1016-CC
+18 スティーズ A TW　1016L-CC
+18 スティーズ A TW　1016XH
+18 スティーズ A TW　1016XHL
+18 スパルタン IC　150H
+18 スパルタン IC　150HL
+18 フネ X　100H
+18 フネ X　100HL
+18 リョウガ　1016-CC
+18 リョウガ　1016H
+18 リョウガ　1016HL
+18 リョウガ　1016L-CC
+18 リョウガ　1520-CC
+18 リョウガ　1520H
+18 リョウガ　1520HL
+18 リョウガ　1520L-CC
+18 幻覇王 石鯛 ライト　20H
+18 紅牙 TW ハイパーカスタム　4.9L-RM
+18 紅牙 TW ハイパーカスタム　4.9R-RM
+18 紅牙 TW ハイパーカスタム　8.6L
+18 紅牙 TW ハイパーカスタム　8.6R
+19 アドミラ　100H
+19 アドミラ　100HL
+19 アドミラ　100XH
+19 アドミラ　100XHL
+19 キャタリナ　15H
+19 スティーズ CT SV TW　700H
+19 スティーズ CT SV TW　700HL
+19 スティーズ CT SV TW　700SH
+19 スティーズ CT SV TW　700SHL
+19 スティーズ CT SV TW　700XH
+19 スティーズ CT SV TW　700XHL
+19 タトゥーラ TW 100　100H
+19 タトゥーラ TW 100　100HL
+19 タトゥーラ TW 100　100SH
+19 タトゥーラ TW 100　100SHL
+19 タトゥーラ TW 100　100XH
+19 タトゥーラ TW 100　100XHL
+19 バス X　80SH
+19 バス X　80SHL
+19 ミリオネア CT SV　70H
+19 ミリオネア CT SV　70HL
+19 ミリオネア CT SV　70SH
+19 ミリオネア CT SV　70SHL
+19 モアザン PE TW　1000SHL-TW
+19 モアザン PE TW　1000SH-TW
+19 モアザン PE TW　1000XHL-TW
+19 モアザン PE TW　1000XH-TW
+20 HRF　PE スペシャル 8.1L-TW
+20 HRF　PE スペシャル 8.1R-TW
+20 キャタリナ　15H-SJ
+20 コロネットⅡ　パープル
+20 コロネットⅡ　バイオレット
+20 コロネットⅡ　ブラック
+20 コロネットⅡ　ブルー
+20 ジリオン 10.0 SV TW　10.0L
+20 ジリオン 10.0 SV TW　10.0R
+20 スティーズ AIR TW　500H
+20 スティーズ AIR TW　500HL
+20 スティーズ AIR TW　500XXH
+20 スティーズ AIR TW　500XXHL
+20 スパルタン IC　200H
+20 スパルタン IC　200HL
+20 タトゥーラ SV TW　103H
+20 タトゥーラ SV TW　103HL
+20 タトゥーラ SV TW　103SH
+20 タトゥーラ SV TW　103SHL
+20 タトゥーラ SV TW　103XH
+20 タトゥーラ SV TW　103XHL
+20 ティエラ IC　100XH
+20 ティエラ IC　100XHL
+20 ティエラ IC　105XH
+20 ティエラ IC　105XHL
+20 フネ XT　150H
+20 フネ XT　150HL
+20 フネ XT　150P
+20 フネ XT　150PL
+20 ライト SW X IC X　IC
+20 ライト SW X IC X　ICL
+20 紅牙 X IC　X IC
+21 PR　100
+21 PR　100(3.5号糸付)
+21 PR　100L
+21 アドミラ A 100XHL
+21 アドミラ A　100XHL
+21 アルファス AIR TW　7.1L
+21 アルファス AIR TW　7.1R
+21 アルファス AIR TW　8.6L
+21 アルファス AIR TW　8.6R
+21 アルファス SV TW　800H
+21 アルファス SV TW　800HL
+21 アルファス SV TW　800XH
+21 アルファス SV TW　800XHL
+21 ジリオン SV TW　1000
+21 ジリオン SV TW　1000H
+21 ジリオン SV TW　1000HL
+21 ジリオン SV TW　1000L
+21 ジリオン SV TW　1000P
+21 ジリオン SV TW　1000PL
+21 ジリオン SV TW　1000XH
+21 ジリオン SV TW　1000XHL
+21 ジリオン TW HD　1000H
+21 ジリオン TW HD　1000HL
+21 ジリオン TW HD　1000XH
+21 ジリオン TW HD　1000XHL
+21 スティーズ A TW HLC　6.3L
+21 スティーズ A TW HLC　6.3R
+21 スティーズ A TW HLC　7.1L
+21 スティーズ A TW HLC　7.1R
+21 スティーズ LTD SV TW　1000
+21 スティーズ LTD SV TW　1000H
+21 スティーズ LTD SV TW　1000HL
+21 スティーズ LTD SV TW　1000L
+21 ソルティガ IC　100
+21 ソルティガ IC　100L
+21 ソルティガ IC　100P-DH
+21 ソルティガ IC　100PL-DH
+21 ソルティガ IC　300
+21 ソルティガ IC　300HL-SJ
+21 ソルティガ IC　300H-SJ
+21 ソルティガ IC　300L
+21 タトゥーラ TW 300　300
+21 タトゥーラ TW 300　300L
+21 タトゥーラ TW 300　300XH
+21 タトゥーラ TW 300　300XHL
+21 タトゥーラ TW 400　400
+21 タトゥーラ TW 400　400H
+21 タトゥーラ TW 400　400HL
+21 タトゥーラ TW 400　400L
+21 ティエラ A IC　150-DH
+21 ティエラ A IC　150H
+21 ティエラ A IC　150H-DH
+21 ティエラ A IC　150HL
+21 ティエラ A IC　150HL-DH
+21 ティエラ A IC　150L-DH
+21 バサラ　100
+21 バサラ　100L
+21 バサラ　150
+21 バサラ　150L
+21 バサラ　200
+21 バサラ　200L
+21 バサラ IC　150
+21 バサラ IC　150L
+21 バサラ IC　250P
+21 バサラ IC　250PL
+21 フネ XT　150PL-OP
+21 フネ XT　150P-OP
+21 ライト SW X IC X　IC SS
+21 ライト SW X IC X　ICL SS
+21 紅牙 IC　150
+21 紅牙 IC　150H
+21 紅牙 IC　150HL
+21 紅牙 IC　150L
+21 紅牙 IC　150P
+21 紅牙 IC　150PL
+22 アルファス SV TW　800S-H
+22 アルファス SV TW　800S-HL
+22 アルファス SV TW　800S-XH
+22 アルファス SV TW　800S-XHL
+22 シルバーウルフ SV TW PE スペシャル　1000XH
+22 シルバーウルフ SV TW PE スペシャル　1000XHL
+22 シルバークリーク エア TW ストリームカスタム　8.5L
+22 シルバークリーク エア TW ストリームカスタム　8.5R
+22 スティーズ A Ⅱ TW　1000
+22 スティーズ A Ⅱ TW　1000H
+22 スティーズ A Ⅱ TW　1000HL
+22 スティーズ A Ⅱ TW　1000L
+22 スティーズ A Ⅱ TW　1000XH
+22 スティーズ A Ⅱ TW　1000XHL
+22 スティーズ A TW HLC　8.1L
+22 スティーズ A TW HLC　8.1R
+22 スティーズ LTD SV TW　1000S-XH
+22 スティーズ LTD SV TW　1000S-XHL
+22 ソルティガ 15　15H
+22 ソルティガ 15　15HL
+22 ソルティガ 15　15S
+22 ソルティガ 15　15SL
+22 ソルティガ 15-SJ　15HL-SJ
+22 ソルティガ 15-SJ　15H-SJ
+22 ソルティガ 15-SJ　15L-SJ
+22 ソルティガ 15-SJ　15-SJ
+22 タトゥーラ TW 400　400XH
+22 タトゥーラ TW 400　400XHL
+22 タトゥーラ TW 80　80
+22 タトゥーラ TW 80　80H
+22 タトゥーラ TW 80　80HL
+22 タトゥーラ TW 80　80L
+22 タトゥーラ TW 80　80XH
+22 タトゥーラ TW 80　80XHL
+22 ティエラ IC　100
+22 ティエラ IC　100H
+22 ティエラ IC　100HL
+22 ティエラ IC　100L
+22 フネ XT　150P-OP(PE3号糸付)
+22 ライトゲーム IC　150
+22 ライトゲーム IC　150-DH
+22 ライトゲーム IC　150L
+22 ライトゲーム IC　150L-DH
+22 ライトゲーム IC　200
+22 ライトゲーム IC　200L
+22 月下美人 AIR TW PE スペシャル　8.5L
+22 月下美人 AIR TW PE スペシャル　8.5R
+23 IM Z リミットブレイカー TW　HD-C　XH
+23 IM　Z リミットブレイカー TW　HD-C　XHL
+23 PR　100HL
+23 PR　HL
+23 ソルティガ IC　100H-DH
+23 ソルティガ IC　100HL-DH
+23 ソルティガ IC　300-DH
+23 ソルティガ IC　300L-DH
+23 ティエラ LJ IC　200
+23 ティエラ LJ IC　200H
+23 ティエラ LJ IC　200HL
+23 ティエラ LJ IC　200L
+23 紅牙　100
+23 紅牙　100L
+23 紅牙　100XH
+23 紅牙　100XHL
+チヌジャッカー　
+チヌジャッカー HG　
+チヌマスター　
+チヌ駒 X 200　
+  </pre>
+</div>
+
+  <script src="../js/build-item-table.js"></script>
+
+</body>
+
+</html>
