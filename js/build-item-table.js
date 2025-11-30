@@ -1,11 +1,67 @@
 document.addEventListener("DOMContentLoaded", function () {
-    // ① 左サイドバーは全ページ共通で生成
+    // 左サイドバーは全ページ共通で生成
     buildSiteNavSidebar();
 
-    // ② 一度レイアウト計算（サイドバーの高さなど）
+    // ハンバーガーメニューと連動させる
+    setupMobileMenu();
+    // ▼ 左側（階層一覧）用ハンバーガーメニューの制御
+    function setupMobileMenu() {
+        const btn = document.querySelector(".mobile-menu-button");
+        const nav = document.querySelector(".site-nav");
+        if (!btn || !nav) return;
+
+        btn.addEventListener("click", () => {
+            nav.classList.toggle("is-open");
+        });
+
+        nav.addEventListener("click", (e) => {
+            if (e.target.tagName.toLowerCase() === "a") {
+                nav.classList.remove("is-open");
+            }
+        });
+
+        window.addEventListener("resize", () => {
+            if (window.innerWidth >= 600) {
+                nav.classList.remove("is-open");
+            }
+        });
+    }
+    // ▼ 右側（シリーズ一覧）用ハンバーガーメニューの制御
+    function setupRightMenu() {
+        const btn = document.querySelector(".right-menu-button");
+        const rightNav = document.querySelector(".series-index");
+
+        if (!btn) return;
+
+        // そのページにシリーズサイドバーがなければボタンを隠す
+        if (!rightNav) {
+            btn.style.display = "none";
+            return;
+        }
+
+        btn.addEventListener("click", () => {
+            rightNav.classList.toggle("is-open");
+        });
+
+        // 画面が広くなったら（PC幅）、右サイドバーを普通のレイアウトに戻す
+        window.addEventListener("resize", () => {
+            if (window.innerWidth >= 600 && rightNav) {
+                rightNav.classList.remove("is-open");
+            }
+        });
+    }
+
+    document.addEventListener("DOMContentLoaded", function () {
+        buildSiteNavSidebar();
+        setupMobileMenu();
+        layoutSidebar();
+        // …以下は今のままでOK
+    });
+
+    // 一度レイアウト計算（サイドバーの高さなど）
     layoutSidebar();
 
-    // ③ ここから下は「番手テーブルがあるページだけ」の処理
+    // ここから下は「番手テーブルがあるページだけ」の処理
     const source = document.getElementById("item-source");
     const table = document.getElementById("item-table");
 
@@ -185,6 +241,9 @@ document.addEventListener("DOMContentLoaded", function () {
 
     // 初期描画（全シリーズ折りたたみ＋見出しだけ表示）
     filterRows();
+
+    // 右ハンバーガーボタンと連動させる
+    setupRightMenu();
 });
 
 // ▼ 検索ボックス自動挿入

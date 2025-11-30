@@ -6,7 +6,6 @@ body {
   height: 100%;
   margin: 0;
   padding: 0;
-  /* ★ 全体はスクロールさせない */
   overflow: hidden;
 }
 
@@ -19,12 +18,12 @@ body {
 
   background-image: url('../images/background.png');
   background-repeat: no-repeat;
-  background-size: contain;
-  background-position: center center;
-  background-attachment: fixed;
-
-  /* ★ フッターの高さぶん余白を確保（高さは好みで調整） */
-  /*padding-bottom: 60px;*/
+  background-size: cover;
+  /* ★どの端末でも余白ナシ */
+  background-position: 60% 100%;
+  /* ★釣り人寄りに表示（好みで調整） */
+  background-attachment: scroll;
+  /* モバイルでも無難 */
 }
 
 /* =====================
@@ -35,21 +34,28 @@ body {
   background: rgba(255, 255, 255, 0.9);
   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
   padding: 8px 0;
+  position: relative;
+  /* ★ 追加：子要素を絶対配置しやすくする */
 }
 
 .page-header h1 {
   margin: 0;
   font-size: 1.4rem;
 }
+
 /* =====================
    main-wrap（中央の見出し＋スクロールビュー）
    ===================== */
 .main-wrap {
   width: 100%;
-  /* サイドバー用の余白は後でメディアクエリ内で付ける */
-  /* ★ 余った縦スペースを埋める＋自前スクロール領域だけにする */
   flex: 1;
-  overflow: hidden;
+
+  /* ★ 中央エリアをスクロール可能にする */
+  overflow-y: auto;
+
+  /* ★ 画面下に常に余白（背景が見える部分）を確保 */
+  padding-bottom: 120px;
+  /* お好みで 80px などに調整 */
 }
 
 /* =====================
@@ -72,10 +78,45 @@ body {
 }
 
 /* =====================
-   見出し
+   見出し（PCデフォルト）
    ===================== */
 h1 {
   margin: 16px 0 0;
+}
+
+/* コンテンツ中央の大見出し（SHIMANO） */
+.main-wrap h1 {
+  font-size: 3rem;
+}
+
+/* サブ見出し（スピニングリール） */
+.main-wrap h2 {
+  font-size: 2.4rem;
+}
+
+/* 画面幅が 900px 以下なら全体的に一段階小さく */
+@media (max-width: 900px) {
+  .main-wrap h1 {
+    font-size: clamp(1.8rem, 4vw, 2.4rem);
+  }
+
+  .main-wrap h2 {
+    font-size: clamp(1.3rem, 3vw, 1.8rem);
+  }
+}
+
+/* 小さい端末の横持ち：さらにぐっと小さくして比率を下げる */
+@media (max-width: 900px) and (orientation: landscape) {
+  .main-wrap h1 {
+    font-size: clamp(1.3rem, 3vw, 1.8rem);
+    margin-top: 8px;
+    /* 上の余白も少しだけ詰める */
+  }
+
+  .main-wrap h2 {
+    font-size: clamp(1.1rem, 2.5vw, 1.4rem);
+    margin-top: 4px;
+  }
 }
 
 /* =====================
@@ -558,6 +599,35 @@ body.maker-page .maker-button:hover {
   font-size: 0.85rem;
 }
 
+/* スマホ幅のときの左サイドバー（ハンバーガーメニュー用） */
+@media (max-width: 600px) {
+  .site-nav {
+    display: block;
+    /* ← スマホでは常に要素は作っておく */
+    position: fixed;
+    top: 56px;
+    /* ヘッダーの高さに合わせてお好みで調整 */
+    left: 0;
+    bottom: 0;
+    width: 70%;
+    /* メニューの横幅（お好みで） */
+    max-width: 260px;
+    background: rgba(255, 255, 255, 0.97);
+    box-shadow: 2px 0 6px rgba(0, 0, 0, 0.2);
+    overflow-y: auto;
+    z-index: 900;
+
+    /* 最初は画面の外に隠しておく */
+    transform: translateX(-100%);
+    transition: transform 0.25s ease;
+  }
+
+  /* 開いているとき */
+  .site-nav.is-open {
+    transform: translateX(0);
+  }
+}
+
 /* PC幅で表示＆右サイドバーと同じ雰囲気に */
 @media (min-width: 600px) {
   .site-nav {
@@ -653,44 +723,187 @@ body.maker-page .maker-button:hover {
 
   /* サイドバー内で少し余裕を持たせる */
 }
+
 /* --------------------------
    スマホ用ハンバーガーメニュー
 -------------------------- */
-.mobile-menu-button {
-  display: none;
-  position: fixed;
-  top: 14px;
-  left: 14px;
-  font-size: 26px;
-  background: rgba(255, 255, 255, 0.85);
-  padding: 4px 10px;
-  border-radius: 6px;
-  z-index: 9999;
-  cursor: pointer;
+.page-header {
+  position: relative;
 }
 
-/* スマホ幅で表示する */
+/* ハンバーガーボタン：共通スタイル */
+.mobile-menu-button {
+  position: absolute;
+  top: 50%;
+  left: 12px;
+  transform: translateY(-50%);
+  width: 44px;
+  height: 44px;
+  background: rgba(0, 0, 0, 0.65);
+  border-radius: 16px;
+  color: #fff;
+  font-size: 22px;
+
+  /* ★ 初期状態は非表示にしておく */
+  display: none;
+
+  align-items: center;
+  justify-content: center;
+
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+
+  cursor: pointer;
+  z-index: 999;
+  border: none;
+}
+
+/* 右側のハンバーガーボタン（シリーズ一覧用） */
+.right-menu-button {
+  position: absolute;
+  top: 50%;
+  right: 12px;
+  transform: translateY(-50%);
+  width: 44px;
+  height: 44px;
+  background: rgba(0, 0, 0, 0.65);
+  border-radius: 16px;
+  color: #fff;
+  font-size: 22px;
+
+  display: none;
+  /* 基本は非表示 */
+  align-items: center;
+  justify-content: center;
+
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+  cursor: pointer;
+  z-index: 999;
+  border: none;
+}
+
+/* スマホ幅のときだけ表示 ＋ タイトルの位置調整 */
 @media (max-width: 600px) {
   .mobile-menu-button {
+    display: flex;
+  }
+
+  .right-menu-button {
+    display: flex;
+    /* スマホ幅のときだけ右ボタン表示 */
+  }
+
+  /* 左右のボタンぶん余白を確保して、タイトルが重ならないように */
+  .page-header {
+    padding-left: 72px;
+    /* 左ボタン (44px) ＋ 余白 */
+    padding-right: 72px;
+    /* 右ボタン (44px) ＋ 余白 */
+    box-sizing: border-box;
+  }
+      .mobile-menu-button {
+        display: flex;
+      }
+  
+      .right-menu-button {
+        display: flex;
+        /* スマホ幅のときだけ右ボタン表示 */
+      }
+  
+      /* 左右のボタンぶん余白を確保して、タイトルが重ならないように */
+        .page-header {
+          width: 100%;
+          background: rgba(255, 255, 255, 0.9);
+          box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+          padding: 8px 0;
+          position: relative;
+    
+          /* 追加：ヘッダーの最低高さを確保（ボタン44pxが収まるように） */
+          min-height: 60px;
+    
+          /* お好みですが、見出しを縦中央揃えしておくとバランスが良いです */
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          box-sizing: border-box;
+        }
+  
+      .page-header h1 {
+        margin: 0;
+  
+        /* 画面幅に応じて自動で縮小（0.8rem〜1.2remの間で変動） */
+        font-size: clamp(0.8rem, 3.5vw, 1.2rem);
+  
+        /* 1行に固定せず、必要なら折り返して全表示 */
+        white-space: normal;
+        overflow: visible;
+        text-overflow: clip;
+  
+        line-height: 1.2;
+      }
+    }
+
+/* スマホ幅のときの右サイドバー（シリーズ一覧用） */
+@media (max-width: 600px) {
+  .series-index {
     display: block;
-  }
-
-  /* スマホではサイドバーは隠す（初期状態） */
-  .site-nav {
-    display: none;
-  }
-
-  /* 開いたときの見た目 */
-  .site-nav.open {
-    display: block !important;
+    /* 要素自体は常に作っておく */
     position: fixed;
-    top: 60px;
-    left: 0;
-    width: 80%;
-    height: calc(100vh - 60px);
+    top: 56px;
+    /* ヘッダー高さに合わせて調整 */
+    right: 0;
+    bottom: 0;
+    width: 70%;
+    max-width: 260px;
     background: rgba(255, 255, 255, 0.97);
-    padding: 12px;
-    z-index: 9998;
+    box-shadow: -2px 0 6px rgba(0, 0, 0, 0.2);
     overflow-y: auto;
+    z-index: 900;
+
+    /* 右の外に隠しておき、is-open のときスライドイン */
+    transform: translateX(100%);
+    transition: transform 0.25s ease;
+  }
+
+  .series-index.is-open {
+    transform: translateX(0);
+  }
+}
+
+/* ============================
+   トップ・メーカー一覧：下に余白＋スクロール
+   ============================ */
+
+/* トップページ用 */
+body.index-page .main-wrap {
+  overflow-y: auto;
+  /* 中央だけ縦スクロール可 */
+  padding-bottom: 120px;
+  /* ボタンの下に常に背景の余白を確保（お好みで調整） */
+}
+
+/* メーカー一覧ページ用 */
+body.maker-page .main-wrap {
+  overflow-y: auto;
+  /* 中央だけ縦スクロール可 */
+  padding-bottom: 120px;
+  /* 同じく下に余白 */
+}
+
+/* 小さい端末の横持ちではサイドバーを細くして中央を広くする */
+@media (min-width: 600px) and (max-width: 900px) and (orientation: landscape) {
+
+  /* サイドバーの幅と余白を小さく上書き */
+  :root {
+    --sidebar-width: 140px;
+    /* 220px → 140px に */
+    --sidebar-gap: 8px;
+    /* 16px → 8px に */
+  }
+
+  /* サイドバー内の文字も少しだけ小さく */
+  .site-nav,
+  .series-index {
+    font-size: 0.7rem;
+    padding: 6px 6px;
   }
 }
