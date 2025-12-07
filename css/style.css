@@ -907,3 +907,28 @@ body.maker-page .main-wrap {
     padding: 6px 6px;
   }
 }
+
+/* 小さい端末・縦向きのときはトップページのボタンを縦並びにする */
+@media (max-width: 600px) and (orientation: portrait) {
+
+  /* ロッド／リールの並びを縦方向に */
+  body.index-page .menu-buttons {
+    flex-direction: column;
+    /* ← 横並び → 縦並びに変更 */
+    align-items: center;
+    gap: 20px;
+    margin-top: 40px;
+  }
+
+  /* ボタンが左右で切れないように横幅を画面幅ベースに */
+  body.index-page .menu-button {
+    width: 70vw;
+    /* 画面幅の 70% 程度に */
+    max-width: 260px;
+    /* 大きい端末でも広がりすぎないように上限 */
+    height: 100px;
+    /* 正方形にこだわらないならこのくらいでも */
+    font-size: 1.4rem;
+    /* 必要なら少し小さめにも調整可 */
+  }
+}
