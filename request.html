@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>番手追加のリクエスト | TackleIndex〜釣具モデル検索〜</title>
+  <link rel="stylesheet" href="./css/style.css">
+</head>
+
+<body class="maker-page">
+  <!-- 共通ヘッダー -->
+  <header class="page-header">
+    <!-- スマホ専用メニューボタン（左サイドバー用） -->
+    <button class="mobile-menu-button" type="button" aria-label="メニューを開く">
+      ☰
+    </button>
+
+    <h1>TackleIndex〜釣具モデル検索〜</h1>
+  </header>
+
+  <!-- 左サイドバー（.site-nav）は JS の buildSiteNavSidebar() が自動生成 -->
+
+  <main class="main-wrap">
+    <h1>番手追加のリクエスト</h1>
+
+    <p class="request-lead">
+      未登録のモデルや番手、表記ゆれの修正などがありましたら、こちらからお知らせください。<br>
+      いただいた内容をもとに、順次データベースを更新していきます。
+    </p>
+
+    <div class="request-box">
+      <form class="request-form">
+        <div class="form-row">
+          <label for="req-type">種別</label>
+          <select id="req-type" name="種別">
+            <option value="リール">リール</option>
+            <option value="ロッド">ロッド</option>
+            <option value="その他">その他</option>
+          </select>
+        </div>
+
+        <div class="form-row">
+          <label for="req-brand">メーカー名</label>
+          <input id="req-brand" name="メーカー名" type="text" placeholder="例）SHIMANO, DAIWA など" required />
+        </div>
+
+        <div class="form-row">
+          <label for="req-series">シリーズ名</label>
+          <input id="req-series" name="シリーズ名" type="text" placeholder="例）23 ヴァンキッシュ, 24 セルテート など" />
+        </div>
+
+        <div class="form-row">
+          <label for="req-model">番手・モデル名</label>
+          <input id="req-model" name="番手・モデル名" type="text" placeholder="例）C3000MHG, 5000D-XH など" required />
+        </div>
+
+        <div class="form-row">
+          <label for="req-url">参考URL（任意）</label>
+          <input id="req-url" name="参考URL" type="url" placeholder="メーカー公式ページなどがあれば" />
+        </div>
+
+        <div class="form-row">
+          <label for="req-message">その他・補足（任意）</label>
+          <textarea id="req-message" name="メッセージ" rows="4" placeholder="誤記の指摘や、補足情報などがあればご記入ください。"></textarea>
+        </div>
+
+        <div class="form-row">
+          <label for="req-mail">返信用メールアドレス（任意）</label>
+          <input id="req-mail" name="返信用メールアドレス" type="email" placeholder="返信が必要な場合のみご記入ください" />
+        </div>
+
+        <button type="submit" class="request-submit">
+          管理人に送信する
+        </button>
+
+        <p class="request-notice">
+          未登録モデル・番手や誤記などをお知らせいただけると助かります。
+        </p>
+      </form>
+        <!-- 送信完了メッセージ（最初は非表示） -->
+        <div class="request-thanks" style="display:none;">
+          リクエストありがとうございます。<br>
+          内容を確認のうえ、データベースに反映していきます。
+        </div>
+    </div>
+  </main>
+
+  <!-- 左サイドバー・右サイドバーなど共通JS -->
+  <script src="./js/build-item-table.js"></script>
+</body>
+
+</html>

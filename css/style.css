@@ -94,6 +94,20 @@ h1 {
   font-size: 2.4rem;
 }
 
+/* 中央の大見出し＆サブ見出しの共通装飾 */
+.main-wrap h1,
+.main-wrap h2 {
+  display: inline-block;
+  /* タイトル部分だけ箱にする */
+  padding: 0.3em 0.8em;
+  background: rgba(255, 255, 255, 0.8);
+  /* 白の半透明ラベル */
+  border-radius: 12px;
+  /* 角を少し丸く */
+  text-shadow: 0 2px 3px rgba(0, 0, 0, 0.25);
+  /* 文字にほんのり影 */
+}
+
 /* 画面幅が 900px 以下なら全体的に一段階小さく */
 @media (max-width: 900px) {
   .main-wrap h1 {
@@ -298,6 +312,9 @@ th {
   font-size: 0.8rem;
   cursor: pointer;
 }
+.series-index li button {
+  border-bottom: 1px solid #ccc;
+}
 
 .series-index button:hover {
   background: #eee;
@@ -313,6 +330,29 @@ th {
   border-top: 2px solid #000;
   cursor: pointer;
   padding-left: 4px;
+}
+
+/* シリーズ一覧：1行ごとに色分け（ゼブラ柄） */
+.series-index li:nth-child(odd) button {
+  background-color: #f7f7f7;
+  /* 1行目・3行目… */
+}
+
+.series-index li:nth-child(even) button {
+  background-color: #e9f2ff;
+  /* 2行目・4行目… 少し青み */
+}
+
+/* 行の見やすさUP用の調整 */
+.series-index li button {
+  border-radius: 4px;
+  margin-bottom: 2px;
+  line-height: 1.3;
+}
+
+/* ホバー時は共通で少し濃く */
+.series-index li button:hover {
+  background-color: #d6e4ff;
 }
 
 /* ▼ 閉じているとき（折りたたみ） */
@@ -931,4 +971,112 @@ body.maker-page .main-wrap {
     font-size: 1.4rem;
     /* 必要なら少し小さめにも調整可 */
   }
+}
+/* =====================
+   番手追加リクエストページ
+   ===================== */
+
+.request-lead {
+  margin: 12px auto 16px;
+  width: 90%;
+  max-width: 720px;
+  font-size: 0.9rem;
+  line-height: 1.6;
+  text-align: left;
+}
+
+.request-box {
+  margin: 0 auto;
+  width: 90%;
+  max-width: 720px;
+  background: rgba(255, 255, 255, 0.9);
+  box-shadow: 0 0 6px rgba(0, 0, 0, 0.15);
+  border-radius: 8px;
+  padding: 12px 14px 16px;
+  box-sizing: border-box;
+  text-align: left;
+}
+
+.request-form {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.request-form .form-row {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.request-form label {
+  font-size: 0.85rem;
+  font-weight: bold;
+}
+
+.request-form input,
+.request-form textarea,
+.request-form select {
+  font-size: 0.9rem;
+  padding: 6px 8px;
+  border-radius: 4px;
+  border: 1px solid #ccc;
+  box-sizing: border-box;
+}
+
+.request-form textarea {
+  resize: vertical;
+}
+
+.request-submit {
+  display: block;
+  /* フォーム内で横方向センター */
+  margin: 16px auto 0;
+
+  /* 少し大きめに */
+  padding: 12px 40px;
+  font-size: 1rem;
+  font-weight: bold;
+
+  color: #fff;
+  background: #1e88e5;
+  /* 青系で目立たせる（好みで変更OK） */
+  border: none;
+  border-radius: 999px;
+  /* まるいピル型ボタン */
+  cursor: pointer;
+  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.25);
+
+  transition: transform 0.1s ease, box-shadow 0.1s ease, background 0.15s ease;
+}
+
+/* ホバー時の強調 */
+.request-submit:hover {
+  background: #1565c0;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+}
+
+/* クリック中は少しだけ戻す */
+.request-submit:active {
+  transform: translateY(0);
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.25);
+}
+
+.request-notice {
+  margin-top: 8px;
+  font-size: 0.75rem;
+  color: #666;
+}
+
+.request-lead,
+.request-thanks {
+  background: rgba(255, 255, 255, 0.75);
+  padding: 20px 24px;
+  border-radius: 18px;
+  line-height: 1.8;
+  color: #1d2c3a;
+  /* 濃紺で柔らかい黒 */
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+  margin-bottom: 20px;
 }

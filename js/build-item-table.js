@@ -2,6 +2,9 @@ document.addEventListener("DOMContentLoaded", function () {
     // 左サイドバーは全ページ共通で生成
     buildSiteNavSidebar();
 
+    // 番手リクエストフォームの送信処理をセットアップ
+    setupRequestForm();
+
     // ハンバーガーメニューと連動させる
     setupMobileMenu();
     // ▼ 左側（階層一覧）用ハンバーガーメニューの制御
@@ -344,7 +347,10 @@ function buildSiteNavSidebar() {
         { label: "リール", isTitle: true, level: 0 },
         { label: "リールカテゴリ一覧", href: root + "/reel/reel_category.html", level: 1 },
         { label: "リールメーカー一覧\n　〜スピニングリール〜", href: root + "/reel/reel_spinning.html", level: 2 },
-        { label: "リールメーカー一覧\n　〜ベイトリール〜", href: root + "/reel/reel_bait.html", level: 2 }
+        { label: "リールメーカー一覧\n　〜ベイトリール〜", href: root + "/reel/reel_bait.html", level: 2 },
+
+        { label: "ご意見・要望", isTitle: true, level: 0 },
+        { label: "番手追加のリクエスト", href: root + "/request.html", level: 1 }
     ];
 
     if (!navItems || navItems.length === 0) return;
@@ -464,3 +470,55 @@ function layoutSidebar() {
 window.addEventListener("load", layoutSidebar);
 window.addEventListener("resize", layoutSidebar);
 //window.addEventListener("scroll", layoutSidebar);
+
+// ▼ 番手リクエストフォーム用：Formspree 経由で送信
+function setupRequestForm() {
+    // ★ここを getElementById → querySelector(".request-form") に変更
+    const form = document.querySelector(".request-form");
+    if (!form) return; // request.html 以外では何もしない
+
+    const thanksBox = document.querySelector(".request-thanks");
+    const submitBtn = form.querySelector(".request-submit");
+    const ENDPOINT = "https://formspree.io/f/xanrbrod";
+
+    form.addEventListener("submit", async (e) => {
+        e.preventDefault();
+        // ここから下はそのままでOK
+        if (submitBtn) {
+            submitBtn.disabled = true;
+            submitBtn.textContent = "送信中…";
+        }
+
+        const formData = new FormData(form);
+
+        try {
+            const res = await fetch(ENDPOINT, {
+                method: "POST",
+                body: formData,
+                headers: {
+                    Accept: "application/json"
+                }
+            });
+
+            if (res.ok) {
+                form.style.display = "none";
+                if (thanksBox) {
+                    thanksBox.style.display = "block";
+                }
+            } else {
+                alert("送信に失敗しました。しばらくしてからもう一度お試しください。");
+            }
+        } catch (err) {
+            console.error(err);
+            alert("通信エラーが発生しました。ネットワーク環境をご確認ください。");
+        } finally {
+            if (submitBtn) {
+                submitBtn.disabled = false;
+                submitBtn.textContent = "管理人に送信する";
+            }
+        }
+    });
+}
+
+
+
